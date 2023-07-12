@@ -75,7 +75,7 @@ export class Mas2twimgHandler extends BaseHandler {
         if (this.app._proxyType) switch (this.app._proxyType) {
             case 'socks5': options.agent = new SocksProxyAgent(this.app.localConfig.proxyUrl); break
             case 'https': options.agent = new HttpsProxyAgent(this.app.localConfig.proxyUrl); break
-            case 'http': options.agent = new HttpProxyAgent(this.app.localConfig.proxyUrl); break
+            case 'http': options.agent = resource.startsWith('https://') ? new HttpsProxyAgent(this.app.localConfig.proxyUrl) : new HttpProxyAgent(this.app.localConfig.proxyUrl); break
             default: break
         }
 
